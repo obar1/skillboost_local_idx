@@ -1,25 +1,23 @@
-.PHONY: setup clean test lint type-check format check-all
+.PHONY: setup clean test lint type-check format refactor
 # Variables
 PYTHON := python3
-VENV := venv
-BIN := $(VENV)/bin
+VENV := .venv
 SRC_DIR := src
 TEST_DIR := tests
 help:
-	@echo "Available commands:"
+	@echo ""
+	@echo "\033[1;32m▶ LOCAL COMMANDS:\033[0m"
 	@echo "  make setup         - Create virtual environment and install dependencies"
-	@echo "  make clean        - Remove virtual environment and cache files"
+	@echo "  make clean         - Remove virtual environment and cache files"
 	@echo " "
-	@echo "  make test         - Run all tests"
-	@echo " "
-	@echo "  make lint         - Run pylint"
-	@echo "  make type-check   - Run mypy type checking"
-	@echo "  make format       - Format code with black"
-	@echo "  make refactor     - Run all checks"
-setup:
-	$(PYTHON) -m venv $(VENV)
-	$(BIN)/pip install --upgrade pip
-	$(BIN)/pip install -r requirements.txt
+	@echo "  make format        - Run format code"
+	@echo "  make lint          - Run linter"
+	@echo "  make type-check    - Run type checking"
+	@echo "  make test          - Run all tests"
+	@echo "  make refactor      - Run all checks"
+	@echo "  make gwip          - Git wip"
+setup: clean
+	$(PYTHON) -m pip install --upgrade uv
 clean:
 	rm -rf $(VENV)
 	rm -rf .pytest_cache
@@ -27,12 +25,13 @@ clean:
 	rm -rf .mypy_cache
 	rm -rf **/__pycache__
 test:
-	PYTHONPATH=. $(BIN)/pytest $(TEST_DIR) -v
+	uv run pytest $(TEST_DIR) -vv
 lint:
-	$(BIN)/pylint $(SRC_DIR) $(TEST_DIR)
+	uv run ruff check $(SRC_DIR) --fix
 type-check:
-	$(BIN)/mypy $(SRC_DIR) $(TEST_DIR)
+	uv run mypy $(SRC_DIR)
 format:
-	$(BIN)/black $(SRC_DIR) $(TEST_DIR) 
-	find . -maxdepth 2 -type f -name "*.ipynb" | xargs -I {} bash -c "$(BIN)/black '{}'"
-refactor: format lint type-check test 
+	uv run ruff format $(SRC_DIR) $(TEST_DIR)
+refactor: format lint type-check test
+gwip:
+	git add -A && git commit -m "wip" && git push
