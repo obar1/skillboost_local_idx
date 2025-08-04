@@ -1,19 +1,21 @@
-# pyproject-template
+# readme
 
-[![Makefile CI](https://github.com/obar1/pyproject-template/actions/workflows/makefile.yml/badge.svg)](https://github.com/obar1/pyproject-template/actions/workflows/makefile.yml)
+simple skillboost html->pdf page downloader
 
-simple py-project template 
-> class added just as placeholder for minimal test 
+## setup
 
-
-## init
-use make
-ex
+if you don't have uv
 ```bash
 make setup
-source venv/bin/activate
-pre-commit install # optional
-
-# each time new code is ready for PRs :P
-make refactor
 ```
+
+## demo
+
+```bash
+make demo
+```
+![alt text](image.png)
+
+## batch usage
+
+> write a for loop :)
