@@ -1,0 +1,15 @@
+name: Makefile CI
+on: [push]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+    - name: make setup
+      run: make setup
+    - name: make refactor
+      run: make refactor
+    - name: List files in the repository
+      run: |
+        ls ${{ github.workspace }}

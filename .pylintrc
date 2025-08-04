@@ -1,0 +1,4 @@
+[MESSAGES CONTROL]
+disable = C0301,R0903
+
+ignore-patterns=(.*)_test\.py,test_(.*)\.py
