@@ -16,8 +16,16 @@ make setup
 make demo
 ```
 
-![alt text](image.png)
+![alt text](3f9c1b8e-7a2d-4e5f-bc3a-9f1e8d2a6c4f.png)
 
 ## batch usage
 
 > write a for loop :)
+or use `looper.sh`:
+
+```sh
+bash looper.sh paths 119 130
+bash looper.sh course_templates 93 100
+```
+
+![alt text](a7d4e2c1-9b3f-4c8a-8e2f-1d3b7f9a2e6c.png)
