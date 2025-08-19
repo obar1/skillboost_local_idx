@@ -89,7 +89,7 @@ def main():
     )
     parser.add_argument("template_type", type=str, help="Course Template Type to fetch")
     parser.add_argument("template_id", type=int, help="Course Template ID to fetch")
-    parser.add_argument("--output-dir", default=".", help="Directory to save HTML/PDF")
+    parser.add_argument("--output-dir", default="./.pdf", help="Directory to save HTML/PDF")
     args = parser.parse_args()
     logging.info(f"input args {args}")
 

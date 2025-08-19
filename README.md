@@ -5,6 +5,7 @@ simple skillboost html->pdf page downloader
 ## setup
 
 if you don't have uv
+
 ```bash
 make setup
 ```
@@ -14,6 +15,7 @@ make setup
 ```bash
 make demo
 ```
+
 ![alt text](image.png)
 
 ## batch usage
