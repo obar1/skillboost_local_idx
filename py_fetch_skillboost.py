@@ -2,7 +2,7 @@ import requests
 import logging
 from pathlib import Path
 from typing import Union
-
+HTTPS_SKILL_BOOST="https://cloudskillsboost.google"
 # Disable all logging from WeasyPrint
 weasy_logger = logging.getLogger("weasyprint")
 weasy_logger.setLevel(logging.CRITICAL)
@@ -32,7 +32,7 @@ def save_html(
     html_content: str,
     output_path: Path,
 ) -> None:
-    url = f"https://partner.cloudskillsboost.google/{template_type}/{template_id}"
+    url = f"{HTTPS_SKILL_BOOST}/{template_type}/{template_id}"
     full_html = f"""<!DOCTYPE html>
 <html lang="en">
 <head>
