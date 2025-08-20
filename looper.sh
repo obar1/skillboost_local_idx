@@ -17,6 +17,7 @@ do
     echo "Launching process with itin=$i..."
     (
         $PYTHON -m uv run py_fetch_skillboost.py "$TEMPLATE_TYPE" "$i"
+        echo $!
         sleep $MAGIC_N
     ) &
     
@@ -25,6 +26,5 @@ do
       sleep $MAGIC_N  # Additional sleep for multiples of $MAGIC_N
     fi
 
-    echo $!
 done
 

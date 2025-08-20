@@ -12,7 +12,7 @@ weasy_logger.handlers.clear()
 
 
 def fetch_page(template_type: str, template_id: Union[int, str]) -> str:
-    url = f"https://partner.cloudskillsboost.google/{template_type}/{template_id}"
+    url = f"{HTTPS_SKILL_BOOST}/{template_type}/{template_id}"
     try:
         response = requests.get(url, timeout=15)
         response.raise_for_status()
