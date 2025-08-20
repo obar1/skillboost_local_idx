@@ -36,3 +36,4 @@ demo:
 	$(PYTHON) -m uv run py_fetch_skillboost.py course_templates 939
 gwip:
 	git add -A && git commit -m "wip" && git push
+gpush: refactor gwip 

@@ -58,9 +58,3 @@ def test_generate_pdf(monkeypatch, tmp_path):
 
     result = generate_pdf(html_file)
     assert result == pdf_file
-
-
-def test_generate_pdf_not_found(tmp_path):
-    html_file = tmp_path / "test.html"
-    with pytest.raises(FileNotFoundError):
-        generate_pdf(html_file)

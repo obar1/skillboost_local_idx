@@ -8,6 +8,7 @@ dependencies = [
     "requests",
     "weasyprint",
     "pytest",
-    "ruff"
+    "ruff", "reportlab"
+    
 
 ]
