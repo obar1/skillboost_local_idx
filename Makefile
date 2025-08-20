@@ -31,7 +31,7 @@ format:
 	uv run ruff format $(SRC_DIR) $(TEST_DIR)
 refactor: format lint test
 demo:
-	$(PYTHON) -m uv run py_fetch_skillboost.py paths 119
+	$(PYTHON) -m uv run py_fetch_skillboost.py paths 16
 	$(PYTHON) -m uv run py_fetch_skillboost.py course_templates 621
 gwip:
 	git add -A && git commit -m "wip $$(date +%F)" && git push
