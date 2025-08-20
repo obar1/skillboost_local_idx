@@ -1,7 +1,7 @@
 #!/bin/bash
 MAGIC_N=11 # lol :)
 
-set -x
+# set -x
 
 [ -z "$1" ] && exit 1
 [ -z "$2" ] && exit 1

@@ -63,8 +63,7 @@ def generate_pdf(input_html_path: Path) -> Path:
         logging.info(f"PDF saved to: {output_pdf_path}")
         input_html_path.unlink()
         logging.info(f"Deleted HTML file: {input_html_path}")
-    except Exception as e:
-        logging.error(f"PDF generation failed: {e}")
+    except Exception:
         # Create an empty PDF as fallback
         try:
             from io import BytesIO
