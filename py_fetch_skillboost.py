@@ -2,7 +2,8 @@ import requests
 import logging
 from pathlib import Path
 from typing import Union
-HTTPS_SKILL_BOOST="https://cloudskillsboost.google"
+
+HTTPS_SKILL_BOOST = "https://cloudskillsboost.google"
 # Disable all logging from WeasyPrint
 weasy_logger = logging.getLogger("weasyprint")
 weasy_logger.setLevel(logging.CRITICAL)
