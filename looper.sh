@@ -3,9 +3,7 @@ MAGIC_N=11 # lol :)
 
 set -x # verbose
 
-[ -z "$1" ] && exit 1
-[ -z "$2" ] && exit 1
-[ -z "$3" ] && exit 1
+[ -z "$1" ] || [ -z "$2" ] || [ -z "$3" ] && exit 1
 
 TEMPLATE_TYPE=$1
 _FROM=$2
