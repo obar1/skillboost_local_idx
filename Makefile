@@ -1,7 +1,5 @@
 .PHONY: setup clean test lint type-check format refactor
 # Variables
-PYTHON := python3
-VENV := .venv
 SRC_DIR := .
 TEST_DIR := .
 help:
@@ -17,9 +15,8 @@ help:
 	@echo "  make demo          - Simple demoS"
 	@echo "  make gwip          - Git wip 'some cmd'"
 setup: clean
-	$(PYTHON) -m pip install --upgrade uv
+	curl -Ls https://astral.sh/uv/install.sh | bash
 clean:
-	rm -rf $(VENV)
 	rm -rf .pytest_cache
 	rm -rf .coverage
 	rm -rf **/__pycache__
@@ -31,8 +28,11 @@ format:
 	uv run ruff format $(SRC_DIR) $(TEST_DIR)
 refactor: format lint test
 demo:
-	$(PYTHON) -m uv run py_fetch_skillboost.py paths 16
-	$(PYTHON) -m uv run py_fetch_skillboost.py course_templates 621
+	uv run py_fetch_skillboost.py course_templates 621
+	uv run py_fetch_skillboost.py paths 16
+	uv run py_fetch_skillboost.py paths 1 --allow_invalid_results
+	uv run py_fetch_skillboost.py paths 2 --only_valid_results
+
 gwip:
 	git add -A && git commit -m "wip $$(date +%F)" && git push
 gpush: refactor gwip

@@ -38,7 +38,7 @@ def test_fetch_page_http_error(monkeypatch):
 def test_save_html(tmp_path):
     html_content = "<div>hello</div>"
     out_file = tmp_path / "test.html"
-    save_html("abc", 123, html_content, out_file)
+    save_html("abc", 123, html_content, out_file, True)
     content = out_file.read_text("utf-8")
     assert "hello" in content
     assert "Original page" in content
@@ -56,5 +56,5 @@ def test_generate_pdf(monkeypatch, tmp_path):
     html_file.write_text("<html></html>", "utf-8")
     pdf_file = html_file.with_suffix(".html.pdf")
 
-    result = generate_pdf(html_file)
+    result = generate_pdf(html_file, True)
     assert result == pdf_file

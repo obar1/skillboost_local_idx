@@ -1,20 +1,19 @@
 #!/bin/bash
 MAGIC_N=11 # lol :)
 
-set -x # verbose
+# set -x # verbose
 
 [ -z "$1" ] || [ -z "$2" ] || [ -z "$3" ] && exit 1
 
 TEMPLATE_TYPE=$1
 _FROM=$2
 _TO=$3
-PYTHON=$(which python3)  # Change if using a different Python interpreter
 
 for (( i=_FROM; i<=_TO; i++ ))
 do
     echo "Launching process with itin=$i..."
     (
-        $PYTHON -m uv run py_fetch_skillboost.py "$TEMPLATE_TYPE" "$i"
+        uv run py_fetch_skillboost.py "$TEMPLATE_TYPE" "$i" --allow_invalid_results 
         echo $!
         sleep $MAGIC_N
     ) # & - uncomment this if you are sure of it, it seems SB is not happy of it :P

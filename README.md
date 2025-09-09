@@ -6,13 +6,13 @@ simple skillboost html->pdf page downloader
 
 if you don't have uv
 
-```bash
+```sh
 make setup
 ```
 
 ## demo
 
-```bash
+```sh
 make demo
 ```
 
