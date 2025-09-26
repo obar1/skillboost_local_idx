@@ -5,6 +5,3 @@ venv/
 .ipynb_checkpoints/
 .idea/**
 .vscode/
-
-*.pdf
-.pdf/**
