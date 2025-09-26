@@ -24,8 +24,8 @@ make demo
 or use `looper.sh`:
 
 ```sh
-bash looper.sh paths 16 30
-bash looper.sh course_templates 621 640
+bash looper.sh paths 601 700
+bash looper.sh course_templates 300 500
 ```
 
 ![alt text](a7d4e2c1-9b3f-4c8a-8e2f-1d3b7f9a2e6c.png)
