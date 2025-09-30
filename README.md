@@ -1,6 +1,6 @@
 # readme
 
-simple skillboost html->pdf page downloader
+simple skillboost html->pdf page downloader, so you can have those locally and find what you need quicker...
 
 ## setup
 
