@@ -13,15 +13,14 @@ for (( i=_FROM; i<=_TO; i++ ))
 do
     echo "Launching process with itin=$i..."
     (
-        uv run py_fetch_skillboost.py "$TEMPLATE_TYPE" "$i" --allow_invalid_results 
+        uv run py_fetch_skillboost.py "$TEMPLATE_TYPE" "$i" --allow_invalid_results
         echo $!
         sleep $MAGIC_N
     ) # & - uncomment this if you are sure of it, it seems SB is not happy of it :P
-     
+
     if (( i % $MAGIC_N == 0 )); then
       sleep $MAGIC_N  # Additional sleep for multiples of $MAGIC_N
     fi
 
 done
 echo "check with HTOP or similar..."
-

@@ -1,0 +1,23 @@
+{
+    "name": "Simple py project template",
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "ms-python.python",
+                "ms-python.vscode-pylance",
+                "ms-toolsai.jupyter",
+                "ms-toolsai.jupyter-keymap",
+                "ms-toolsai.jupyter-renderers",
+                "ms-vscode.remote-containers",
+                "ms-vscode-remote.remote-ssh",
+                "ms-vscode-remote.remote-wsl",
+                "ms-azuretools.vscode-containers",
+                "njpwerner.autodocstring",
+                "ms-vsliveshare.vsliveshare",
+                "eamodio.gitlens",
+                "mhutchie.git-graph"
+            ]
+        }
+    },
+    "postStartCommand": "make setup && nohup ./ka &"
+}

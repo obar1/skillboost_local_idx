@@ -1,6 +1,6 @@
 # readme
 
-simple skillboost html->pdf page downloader
+simple skillboost html->pdf page downloader, so you can have those locally and find what you need quicker...
 
 ## setup
 
@@ -33,3 +33,7 @@ bash looper.sh course_templates 621 640
 ## dev
 -  dev code changes
 - `make gpush`
+
+## nb
+> notebooks sectio
+[here](./nb/README.md)
