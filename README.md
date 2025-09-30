@@ -33,3 +33,7 @@ bash looper.sh course_templates 621 640
 ## dev
 -  dev code changes
 - `make gpush`
+
+## nb
+> notebooks sectio
+[here](./nb/README.md)

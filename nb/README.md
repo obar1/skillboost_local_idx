@@ -1,7 +1,3 @@
 # readme
-
-> more interesting
+start with gcp https://cloud.google.com/generative-ai-studio
 [here](./01.ipynb)
-
-and  other dumy  stuff
-[here](./linked-lists.ipynb)
