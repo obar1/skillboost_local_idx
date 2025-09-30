@@ -35,5 +35,6 @@ bash looper.sh course_templates 621 640
 - `make gpush`
 
 ## nb
-> notebooks sectio
+> notebooks section
+
 [here](./nb/README.md)
