@@ -1,14 +1,16 @@
 [project]
 name = "skillboost_local_idx"
-version = "0.1.0"
+version = "0.3.0"
 readme = "README.md"
-requires-python = ">=3.10"
+requires-python = ">=3.12"
 description="skillboost_local_idx"
 dependencies = [
     "requests",
     "weasyprint",
     "pytest",
-    "ruff", "reportlab","loguru"
-    
-
+    "ruff",
+    "reportlab",
+    "loguru",
+    "pre-commit>=4.3.0",
+    "ipykernel>=6.30.1",
 ]

@@ -1,0 +1,19 @@
+name: Makefile CI
+
+on: [push]
+
+
+jobs:
+  build:
+    name: Build and Refactor
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: 📦 Checkout repository
+      uses: actions/checkout@v4
+
+    - name: 🧰 Run setup
+      run: make setup
+
+    - name: 🧪 Run check
+      run: make check
