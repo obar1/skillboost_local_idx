@@ -24,10 +24,10 @@ clean:
 	uv run pre-commit uninstall
 check:
 	uv run pre-commit run --all-files
+gpush:
+	git add -A && git commit -m "wip $$(date +%F)" && git push
 demo:
 	uv run py_fetch_skillboost.py course_templates 621
 	uv run py_fetch_skillboost.py paths 16
 	uv run py_fetch_skillboost.py paths 1 --allow_invalid_results
 	uv run py_fetch_skillboost.py paths 2 --only_valid_results
-gpush:
-	git add -A && git commit -m "wip $$(date +%F)" && git push
