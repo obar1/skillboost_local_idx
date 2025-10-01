@@ -3,7 +3,9 @@ name = "skillboost_local_idx"
 version = "0.3.0"
 readme = "README.md"
 requires-python = ">=3.12"
-description="skillboost_local_idx"
+description="simple skillboost html->pdf page downloader, so you can have those locally and find what you need quicker...",
+    "image": "mcr.microsoft.com/devcontainers/python:1-3.12-bookworm"
+author_email = "obar1+gh@pm.me"
 dependencies = [
     "requests",
     "weasyprint",
