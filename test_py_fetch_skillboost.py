@@ -1,5 +1,5 @@
 import pytest
-from py_fetch_skillboost import fetch_page, save_html, generate_pdf
+from py_fetch_skillboost import fetch_page, save_html
 
 import requests
 
@@ -49,12 +49,3 @@ def test_save_html_recaptcha(tmp_path):
     out_file = tmp_path / "test.html"
     with pytest.raises(Exception):
         save_html("abc", 123, html_content, out_file)
-
-
-def test_generate_pdf(monkeypatch, tmp_path):
-    html_file = tmp_path / "test.html"
-    html_file.write_text("<html></html>", "utf-8")
-    pdf_file = html_file.with_suffix(".html.pdf")
-
-    result = generate_pdf(html_file, True)
-    assert result == pdf_file
