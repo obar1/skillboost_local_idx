@@ -29,5 +29,6 @@ gpush:
 demo:
 	uv run py_fetch_skillboost.py course_templates 621
 	uv run py_fetch_skillboost.py paths 16
+	uv run py_fetch_skillboost.py paths 72
 	uv run py_fetch_skillboost.py paths 1 --allow_invalid_results
 	uv run py_fetch_skillboost.py paths 2 --only_valid_results

@@ -40,7 +40,9 @@ def convert_editthiscookie_to_netscape():
 
     # Write to output file
     output_txt_path.write_text("\n".join(netscape_lines), encoding="utf-8")
-    print(f"Converted {len(cookies)} cookies to Netscape format in '{output_txt_path}'")
+    logging.debug(
+        f"Converted {len(cookies)} cookies to Netscape format in '{output_txt_path}'"
+    )
 
 
 def fetch_page(template_type: str, template_id: Union[int, str]) -> str:
@@ -183,11 +185,6 @@ def main():
         output_dir.mkdir(parents=True, exist_ok=True)
         html_path = output_dir / f"{args.template_type}{args.template_id}.html"
         only_valid_results = args.only_valid_results
-        if html_path.exists():
-            logging.info(
-                f"File '{html_path}' already exists. Skipping download and PDF generation."
-            )
-            return
         convert_editthiscookie_to_netscape()
         html_content = fetch_page(args.template_type, args.template_id)
         save_html(

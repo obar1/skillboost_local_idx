@@ -4,8 +4,6 @@ simple skillboost html->pdf page downloader, so you can have those locally and f
 
 ## setup
 
-if you don't have uv
-
 ```sh
 make setup
 ```
