@@ -1,15 +1,81 @@
 import requests
+from http.cookiejar import MozillaCookieJar
 from loguru import logger as logging
 from pathlib import Path
 from typing import Union
+import json
+
 
 HTTPS_SKILL_BOOST = "https://cloudskillsboost.google"
+COOKIE_FILE_PATH_IN = "cookies.txt"  # Path to Netscape-format cookie file
+COOKIE_FILE_PATH = "cookies.out"  # Path to Netscape-format cookie file
+
+
+def convert_editthiscookie_to_netscape():
+    input_json_path = Path(COOKIE_FILE_PATH_IN)  # JSON format from EditThisCookie
+    output_txt_path = Path(COOKIE_FILE_PATH)  # Netscape format output
+
+    # Load JSON cookies
+    with open(input_json_path, "r", encoding="utf-8") as f:
+        cookies = json.load(f)
+
+    # Convert to Netscape format
+    netscape_lines = [
+        "# Netscape HTTP Cookie File",
+        "# This file was generated from EditThisCookie JSON export",
+        "# Format: domain\tflag\tpath\tsecure\texpiration\tname\tvalue",
+    ]
+
+    for cookie in cookies:
+        domain = cookie.get("domain", "")
+        flag = "TRUE" if domain.startswith(".") else "FALSE"
+        path = cookie.get("path", "/")
+        secure = "TRUE" if cookie.get("secure", False) else "FALSE"
+        expiration = str(cookie.get("expiration", 0))
+        name = cookie.get("name", "")
+        value = cookie.get("value", "")
+
+        line = f"{domain}\t{flag}\t{path}\t{secure}\t{expiration}\t{name}\t{value}"
+        netscape_lines.append(line)
+
+    # Write to output file
+    output_txt_path.write_text("\n".join(netscape_lines), encoding="utf-8")
+    logging.debug(
+        f"Converted {len(cookies)} cookies to Netscape format in '{output_txt_path}'"
+    )
 
 
 def fetch_page(template_type: str, template_id: Union[int, str]) -> str:
     url = f"{HTTPS_SKILL_BOOST}/{template_type}/{template_id}"
     try:
-        response = requests.get(url, timeout=15)
+        # Use a session so cookies and headers are preserved
+        session = requests.Session()
+        session.headers.update(
+            {
+                "User-Agent": (
+                    "Mozilla/5.0 (X11; Linux x86_64) "
+                    "AppleWebKit/537.36 (KHTML, like Gecko) "
+                    "Chrome/115.0.0.0 Safari/537.36"
+                )
+            }
+        )
+
+        # Try to load cookies from a Netscape-format cookie file. If the file
+        # doesn't exist or can't be read, log and continue without cookies.
+        cookie_jar = MozillaCookieJar()
+        try:
+            cookie_jar.load(COOKIE_FILE_PATH, ignore_discard=True, ignore_expires=True)
+            session.cookies = cookie_jar
+        except FileNotFoundError:
+            logging.info(
+                f"Cookie file '{COOKIE_FILE_PATH}' not found -- proceeding without cookies."
+            )
+        except Exception as cookie_err:
+            logging.info(
+                f"Failed to load cookies from '{COOKIE_FILE_PATH}': {cookie_err} -- proceeding without cookies."
+            )
+
+        response = session.get(url, timeout=15)
         response.raise_for_status()
         return response.text
     except requests.HTTPError as http_err:
@@ -19,6 +85,9 @@ def fetch_page(template_type: str, template_id: Union[int, str]) -> str:
         raise
     except requests.RequestException as err:
         logging.info(f"Error fetching the page: {err}")
+        raise
+    except Exception as cookie_err:
+        logging.info(f"Failed to load cookies from file: {cookie_err}")
         raise
 
 
@@ -116,12 +185,7 @@ def main():
         output_dir.mkdir(parents=True, exist_ok=True)
         html_path = output_dir / f"{args.template_type}{args.template_id}.html"
         only_valid_results = args.only_valid_results
-        if html_path.exists():
-            logging.info(
-                f"File '{html_path}' already exists. Skipping download and PDF generation."
-            )
-            return
-
+        convert_editthiscookie_to_netscape()
         html_content = fetch_page(args.template_type, args.template_id)
         save_html(
             args.template_type,
@@ -133,7 +197,14 @@ def main():
     except Exception as e:
         logging.info(f"Failed: {e}")
     finally:
-        generate_pdf(html_path, only_valid_results)
+        # Only attempt PDF generation when html_path was created and exists.
+        try:
+            if "html_path" in locals() and html_path.exists():
+                generate_pdf(html_path, only_valid_results)
+            else:
+                logging.info("No HTML file to convert to PDF.")
+        except Exception as final_err:
+            logging.info(f"Error during final PDF generation step: {final_err}")
 
 
 if __name__ == "__main__":

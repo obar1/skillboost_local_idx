@@ -4,8 +4,6 @@ simple skillboost html->pdf page downloader, so you can have those locally and f
 
 ## setup
 
-if you don't have uv
-
 ```sh
 make setup
 ```
@@ -29,6 +27,14 @@ bash looper.sh course_templates 621 640
 ```
 
 ![alt text](a7d4e2c1-9b3f-4c8a-8e2f-1d3b7f9a2e6c.png)
+
+## cookies
+> you can use cookies from your browser to get more contents from
+https://www.cloudskillsboost.google/
+I used
+https://www.editthiscookie.com/
+to save the cookies from my browser
+into [cookies.txt](./cookies.txt)
 
 ## dev
 -  dev code changes

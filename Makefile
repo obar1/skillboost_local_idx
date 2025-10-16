@@ -5,10 +5,10 @@ VENV := .venv
 BIN := $(VENV)/bin
 help:
 	@echo "Available commands:"
-	@echo "  make setup        - Create virtual environment, install dependencies with uv, and install pre-commit hooks"
-	@echo "  make clean        - Remove virtual environment and cache files"
-	@echo " "
-	@echo "  make test         - Run all tests"
+	@echo "make setup       - Create virtual environment, install dependencies with uv, and install pre-commit hooks"
+	@echo "make clean       - Remove virtual environment and cache files"
+	@echo "make demo		- Demo"
+	@echo "make test        - Run all tests"
 setup:
 	curl -LsSf https://astral.sh/uv/install.sh | sh
 	uv sync
@@ -29,5 +29,6 @@ gpush:
 demo:
 	uv run py_fetch_skillboost.py course_templates 621
 	uv run py_fetch_skillboost.py paths 16
+	uv run py_fetch_skillboost.py paths 72
 	uv run py_fetch_skillboost.py paths 1 --allow_invalid_results
 	uv run py_fetch_skillboost.py paths 2 --only_valid_results
