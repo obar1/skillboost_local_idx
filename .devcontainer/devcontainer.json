@@ -4,10 +4,6 @@
     "build": {
         "dockerfile": "Dockerfile"
     },
-    "hostRequirements": {
-        "memory": "8gb",
-        "cpu": "2"
-    },
     "customizations": {
         "vscode": {
             "extensions": [
@@ -20,5 +16,8 @@
             ]
         }
     },
-    "postStartCommand": "nohup ./ka &"
+    "postStartCommand": "nohup ./ka &",
+    "hostRequirements": {
+        "cpus" : 2
+    }
 }
