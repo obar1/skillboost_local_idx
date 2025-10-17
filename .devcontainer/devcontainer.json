@@ -16,7 +16,6 @@
             ]
         }
     },
-    "postStartCommand": "nohup ./ka &",
     "hostRequirements": {
         "cpus" : 2
     }

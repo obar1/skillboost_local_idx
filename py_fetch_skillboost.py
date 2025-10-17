@@ -66,14 +66,11 @@ def fetch_page(template_type: str, template_id: Union[int, str]) -> str:
         try:
             cookie_jar.load(COOKIE_FILE_PATH, ignore_discard=True, ignore_expires=True)
             session.cookies = cookie_jar
-        except FileNotFoundError:
-            logging.info(
-                f"Cookie file '{COOKIE_FILE_PATH}' not found -- proceeding without cookies."
-            )
         except Exception as cookie_err:
-            logging.info(
+            logging.error(
                 f"Failed to load cookies from '{COOKIE_FILE_PATH}': {cookie_err} -- proceeding without cookies."
             )
+            raise cookie_err
 
         response = session.get(url, timeout=15)
         response.raise_for_status()
@@ -112,9 +109,10 @@ def save_html(
 </body>
 </html>"""
     if "This site is protected by reCAPTCHA and the Google" in full_html:
-        raise Exception(
-            "Warning: Page may be protected by reCAPTCHA. PDF conversion might not work properly."
-        )
+        if only_valid_results:
+            raise Exception(
+                "Warning: Page may be protected by reCAPTCHA. PDF conversion might not work properly."
+            )
     output_path.write_text(full_html, encoding="utf-8")
     logging.info(f"Page saved successfully as '{output_path}'")
 
